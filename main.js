@@ -1,5 +1,3 @@
-/*jshint esversion:6*/
-
 $(function () {
     const { InferenceEngine, CVImage } = inferencejs;
     const inferEngine = new InferenceEngine();
@@ -9,11 +7,17 @@ $(function () {
     var totalAmount = 0;
     var detectedBills = [];
     var currentStream = null;
+    var backCameraId = null; // Store the rear camera ID
 
     const currencyValues = {
         "1": 1, "10": 10, "100": 100, "1000": 1000,
         "20": 20, "200": 200, "5": 5, "50": 50, "500": 500
     };
+
+    // Add a button for switching to the rear camera
+    const rearCameraBtn = $("<button id='rearCameraBtn'>Use Rear Camera</button>");
+    rearCameraBtn.css({ top: "170px", background: "#ffaa00" });
+    $("body").append(rearCameraBtn);
 
     navigator.mediaDevices.enumerateDevices().then((devices) => {
         const videoDevices = devices.filter(device => device.kind === "videoinput");
@@ -24,15 +28,31 @@ $(function () {
                 .val(device.deviceId)
                 .text(device.label || `Camera ${index + 1}`);
             cameraSelect.append(option);
+
+            // Identify rear camera
+            if (device.label.toLowerCase().includes("back") || device.label.toLowerCase().includes("rear")) {
+                backCameraId = device.deviceId;
+            }
         });
 
+        // Default to first camera
         if (videoDevices.length > 0) {
             startCamera(videoDevices[0].deviceId);
         }
 
+        // Camera dropdown change event
         cameraSelect.change(function () {
             startCamera($(this).val());
         });
+    });
+
+    // Button event to switch to rear camera manually
+    $("#rearCameraBtn").click(function () {
+        if (backCameraId) {
+            startCamera(backCameraId);
+        } else {
+            alert("No rear camera detected.");
+        }
     });
 
     function startCamera(deviceId) {
@@ -124,7 +144,7 @@ $(function () {
             .then((predictions) => {
                 requestAnimationFrame(detectFrame);
                 renderPredictions(predictions);
-                
+
                 $("#captureBtn").off("click").on("click", function () {
                     totalAmount += detectedBills.reduce((a, b) => a + b, 0);
                     $("#totalAmount").text(`Total: ${totalAmount} PHP`);
