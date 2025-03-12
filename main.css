@@ -1,0 +1,71 @@
+html, body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body.loading::before {
+    content: "Loading Model...";
+    color: white;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 20px;
+    font-size: 2em;
+    font-weight: bold;
+    z-index: 100;
+}
+
+video, canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+button, select {
+    position: absolute;
+    left: 10px;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#cameraSelect {
+    top: 10px;
+    background: #222;
+    color: white;
+}
+
+#captureBtn {
+    top: 50px;
+    background: #00aaff;
+}
+
+#clearBtn {
+    top: 90px;
+    background: #ff3333;
+}
+
+#totalAmount {
+    position: absolute;
+    top: 130px;
+    left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    z-index: 10;
+}
+
+#fps {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
