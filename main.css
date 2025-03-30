@@ -30,35 +30,57 @@ video, canvas {
 button, select {
     position: absolute;
     left: 10px;
-    padding: 10px;
-    font-size: 16px;
+    padding: 30px; /* Increased padding for a much bigger button */
+    font-size: 32px; /* Further increased font size for visibility */
     color: white;
     border: none;
     cursor: pointer;
     z-index: 10;
+    border-radius: 15px; /* More rounded edges for accessibility */
+    opacity: 0.5; /* Make buttons semi-transparent */
 }
 
 #cameraSelect {
     top: 10px;
     background: #222;
     color: white;
+    width: 300px; /* Increased width for easier selection */
 }
 
 #captureBtn {
-    top: 50px;
-    background: #00aaff;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full screen width */
+    height: 50vh; /* Half the screen height */
+    background: rgba(0, 170, 255, 0.5); /* Semi-transparent blue */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: bold;
 }
 
 #clearBtn {
-    top: 90px;
-    background: #ff3333;
+    top: 50vh; /* Starts from the middle */
+    left: 0;
+    width: 100vw;
+    height: 50vh; /* Covers the lower half */
+    background: rgba(255, 51, 51, 0.5); /* Semi-transparent red */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: bold;
 }
 
 #totalAmount {
     position: absolute;
-    top: 130px;
-    left: 10px;
-    font-size: 18px;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 32px; /* Increased font size for readability */
     font-weight: bold;
     color: white;
     z-index: 10;
@@ -68,4 +90,5 @@ button, select {
     position: absolute;
     bottom: 10px;
     left: 10px;
+    font-size: 24px; /* Increased font size for readability */
 }
